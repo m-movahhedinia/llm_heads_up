@@ -5,20 +5,18 @@
 
 This project is a **multi-agent game platform** designed to pit large language models (LLMs) against one another and against humans in a playful yet technically rigorous format. Inspired by the *Heads Up!* game, the system showcases advanced **agentic LLM orchestration**, **evaluation frameworks**, and **human-in-the-loop interaction**.
 
-The platform demonstrates mastery of modern ML engineering practices, including **RAG**, **DSPy**, **LangChain/LangGraph**, **LLMLingua**, **Pydantic AI**, **Grafana dashboards**, and **Infrastructure-as-Code (Terraform)**.
-
 ## 🎮 Game Concept
 
 Two complementary modes highlight different aspects of LLM reasoning:
 
 - **Heads Up! Mode**
-    - A reference model receives a word.
+    - A reference model or a human receives a word.
     - It generates hints.
-    - Other models and humans attempt to guess the word.
+    - Other models and possibly a human attempt to guess the word.
 - **Reverse Mode (Flip the Script)**
-    - Models and humans receive the word.
+    - Models and possibly a human receive the word.
     - They generate hints.
-    - The reference model attempts to guess the word.
+    - The reference model or a human attempts to guess the word.
 
 This dual structure allows evaluation of both **hint generation** and **hint interpretation** across diverse models and humans.
 
@@ -67,7 +65,7 @@ This dual structure allows evaluation of both **hint generation** and **hint int
 - **RAG Module:** Retrieve external knowledge (Wikipedia, arXiv, trivia datasets).
 - **LLMLingua Module:** Compress hints to test robustness.
 - **LangChain / LangGraph:** Orchestrate multi-agent workflows.
-- **Pydantic / Pydantic AI:** Enforce structured outputs (JSON with fields like `hint`, `guess`, `confidence`).
+- **Pydantic / Pydantic AI:** Enforce structured outputs (TOON/JSON with fields like `hint`, `guess`, `confidence`).
 - **Additional Tools:**
     - Dictionary/thesaurus for semantic hints.
     - Embedding-based similarity search.
@@ -79,7 +77,6 @@ This dual structure allows evaluation of both **hint generation** and **hint int
     - Accuracy (correct guesses).
     - Creativity (novelty of hints).
     - Efficiency (number of hints needed).
-- **Scientific Metrics:**
     - Perplexity of hints (surprise factor).
     - Entropy of guesses (uncertainty quantification).
     - Calibration curves (confidence vs. correctness).
