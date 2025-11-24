@@ -3,7 +3,7 @@
 ### ⚠️ **This is an incomplete and ongoing project.**
 ## Overview
 
-This project is a **multi-agent game platform** designed to pit large language models (LLMs) against one another and against humans in a playful yet technically rigorous format. Inspired by the *Heads Up!* game, the system showcases advanced **agentic LLM orchestration**, **evaluation frameworks**, and **human-in-the-loop interaction**.
+This project is a **multi-agent game platform** designed to pit large language models (LLMs) against one another and against humans in a playful yet technically rigorous format. Inspired by the *Heads Up!* game, the system aims to showcase advanced agentic LLM orchestration technics, evaluation frameworks , the effect of human-in-the-loop interaction, and the capabilities of the models.
 
 ## 🎮 Game Concept
 
@@ -131,3 +131,4 @@ This dual structure allows evaluation of both **hint generation** and **hint int
 ### Considerations
 - Formal methodology to select the refrence and judge agents.
 - Consider biasness of HITL
+- Challenging enough set of words and hints for the curated data.
