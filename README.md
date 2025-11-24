@@ -57,19 +57,20 @@ This dual structure allows evaluation of both **hint generation** and **hint int
 - **Hinting Agents (LLMs + Human):** Generate hints for the reference model in reverse mode.
 - **Judge Agent:** Evaluates correctness, creativity, and efficiency.
 - **Model Config Control:**
-    - Expose hyperparameters (temperature, top-k, top-p, max tokens) in UI.
+    - Expose hyperparameters (temperature, top-k, top-p, max tokens, etc) in UI.
     - Allow “agent personalities” via predefined config bundles.
 
 ### 4. Knowledge & Processing Layer
 
 - **RAG Module:** Retrieve external knowledge (Wikipedia, arXiv, trivia datasets).
-- **LLMLingua Module:** Compress hints to test robustness.
+- **Interloper Module:** 
+    - **LLMLingua Module:** Compress hints to test robustness in lossy environment.
+    - **Noise Adder Module:** Adds noise to the hints to test models resilience to semantic drift.
 - **LangChain / LangGraph:** Orchestrate multi-agent workflows.
 - **Pydantic / Pydantic AI:** Enforce structured outputs (TOON/JSON with fields like `hint`, `guess`, `confidence`).
 - **Additional Tools:**
     - Dictionary/thesaurus for semantic hints.
     - Embedding-based similarity search.
-    - Noise injection for resilience testing.
 
 ### 5. Evaluation & Metrics Layer
 
@@ -81,7 +82,7 @@ This dual structure allows evaluation of both **hint generation** and **hint int
     - Entropy of guesses (uncertainty quantification).
     - Calibration curves (confidence vs. correctness).
     - Drift detection (model version evolution).
-    - Human vs. model agreement rate.
+    - Human vs. model agreement rate (m=Modification of Turing test).
     - Latency metrics (time-to-first-hint, time-to-guess).
 - **Visualization:**
     - Grafana dashboards for real-time monitoring.
@@ -95,7 +96,7 @@ This dual structure allows evaluation of both **hint generation** and **hint int
 - **Database:**
     - Stores words, hints, guesses, scores.
 - **Model Registry:**
-    - Tracks participating LLMs (e.g., GPT, Claude, Llama).
+    - Tracks participating LLMs (e.g., GPT, Claude, Llama, etc and their versions).
 - **Infrastructure-as-Code (Terraform):**
     - Codify deployment of:
         - Model registry.
@@ -103,17 +104,17 @@ This dual structure allows evaluation of both **hint generation** and **hint int
         - Database.
         - Grafana + Prometheus stack.
         - CI/CD pipeline.
-- **Bonus:**
+- **Deployment:**
     - Containerize agents with Docker.
-    - Orchestrate with Kubernetes for scalability.
+    - Orchestrate with Kubernetes or Docker Compose.
 
 ## 🔄 Example Flows
 
 ### Heads Up! Mode
 
-1. Word chosen → sent to Reference Model Agent.
+1. Word chosen → sent to Reference Model (or human) Agent.
 2. Reference Model generates hint(s).
-3. Guessing Agents (LLMs + human) receive hint(s).
+3. Guessing Agents (LLMs + human) receive the same hint(s).
 4. Each outputs a guess + confidence.
 5. Judge Agent evaluates correctness.
 6. Scores logged → Grafana updates leaderboard.
@@ -122,7 +123,11 @@ This dual structure allows evaluation of both **hint generation** and **hint int
 
 1. Word chosen → sent to Guessing Agents (LLMs + human).
 2. Each generates hint(s).
-3. Reference Model Agent receives hints.
+3. Reference Model (or human) Agent receives hints.
 4. Outputs guess + confidence.
 5. Judge Agent evaluates correctness.
 6. Scores logged → Grafana updates leaderboard.
+
+### Considerations
+- Formal methodology to select the refrence and judge agents.
+- Consider biasness of HITL
